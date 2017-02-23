@@ -42,17 +42,28 @@ mnist = read_data_sets("data", one_hot=True, reshape=False, validation_size=0)
 X = tf.placeholder(tf.float32, [None, 28, 28, 1])
 # correct answers will go here
 Y_ = tf.placeholder(tf.float32, [None, 10])
-# weights W[784, 10]   784=28*28
-W = tf.Variable(tf.zeros([784, 10]))
-# biases b[10]
+
+# insert more layers
+W1 = tf.Variable(tf.truncated_normal([28*28, 100] ,stddev=0.1))
+B1 = tf.Variable(tf.zeros([100]))
+
+W = tf.Variable(tf.truncated_normal([100, 10], stddev=0.1))
 b = tf.Variable(tf.zeros([10]))
+
+
+## weights W[784, 10]   784=28*28
+#W = tf.Variable(tf.zeros([100, 10]))
+## biases b[10]
+#b = tf.Variable(tf.zeros([10]))
 
 # flatten the images into a single line of pixels
 # -1 in the shape definition means "the only possible dimension that will preserve the number of elements"
 XX = tf.reshape(X, [-1, 784])
 
 # The model
-Y = tf.nn.softmax(tf.matmul(XX, W) + b)
+Y1 = tf.nn.sigmoid(tf.matmul(XX, W1) + B1)
+Y = tf.nn.softmax(tf.matmul(Y1, W) + b)
+#Y = tf.nn.softmax(tf.matmul(Y2, W) + b)
 
 # loss function: cross-entropy = - sum( Y_i * log(Yi) )
 #                           Y: the computed output vector
@@ -119,3 +130,4 @@ datavis.animate(training_step, iterations=2000+1, train_data_update_freq=10, tes
 print("max test accuracy: " + str(datavis.get_max_test_accuracy()))
 
 # final max test accuracy = 0.9268 (10K iterations). Accuracy should peak above 0.92 in the first 2000 iterations.
+# after added one layer [28*28, 100] accuracy reached 0.948

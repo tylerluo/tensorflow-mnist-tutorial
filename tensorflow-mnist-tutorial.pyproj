@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6afcc9b8-08c1-41a4-bd6f-fcd36c4cace1}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>myMnist.py</StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+    <InterpreterVersion />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="INSTALL.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="cloudml\trainer\task.py" />
+    <Compile Include="cloudml\trainer\__init__.py" />
+    <Compile Include="mnist_1.0_softmax.py" />
+    <Compile Include="mnist_2.0_five_layers_sigmoid.py" />
+    <Compile Include="my_mnist_2.1_five_layers_relu_lrdecay.py" />
+    <Compile Include="mnist_2.2_five_layers_relu_lrdecay_dropout.py" />
+    <Compile Include="mnist_3.0_convolutional.py" />
+    <Compile Include="mnist_3.1_convolutional_bigger_dropout.py" />
+    <Compile Include="mnist_4.0_batchnorm_five_layers_sigmoid.py" />
+    <Compile Include="mnist_4.1_batchnorm_five_layers_relu.py" />
+    <Compile Include="mnist_4.2_batchnorm_convolutional.py" />
+    <Compile Include="myMnist.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="tensorflowvisu.py" />
+    <Compile Include="tensorflowvisu_digits.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="cloudml\" />
+    <Folder Include="cloudml\trainer" />
+  </ItemGroup>
+  <Import Project="$(PtvsTargetsFile)" Condition="Exists($(PtvsTargetsFile))" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="!Exists($(PtvsTargetsFile))" />
+</Project>
