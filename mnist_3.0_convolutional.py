@@ -71,10 +71,10 @@ stride = 2  # output is 7x7
 Y3 = tf.nn.relu(tf.nn.conv2d(Y2, W3, strides=[1, stride, stride, 1], padding='SAME') + B3)
 
 # reshape the output from the third convolution for the fully connected layer
-YY = tf.reshape(Y3, shape=[-1, 7 * 7 * M])
+YY = tf.reshape(Y3, shape=[-1, 7 * 7 * M]) # to meet W4 dimension
 
-Y4 = tf.nn.relu(tf.matmul(YY, W4) + B4)
-Ylogits = tf.matmul(Y4, W5) + B5
+Y4 = tf.nn.relu(tf.matmul(YY, W4) + B4) # W4 transfer YY to Y4, an 1-D array, length 200
+Ylogits = tf.matmul(Y4, W5) + B5 # W5 transfer 200 to 10
 Y = tf.nn.softmax(Ylogits)
 
 # cross-entropy loss function (= -sum(Y_i * log(Yi)) ), normalised for batches of 100  images
